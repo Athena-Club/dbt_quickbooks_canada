@@ -10,8 +10,7 @@ profile: quickbooks  #should be removed if it is a package
 models:
   quickbooks:
     +materialized: table
-    #+schema: quickbooks
-    +schema: core #should be removed if it is a package
+    +schema: quickbooks
     double_entry_transactions:
       +materialized: ephemeral
     transaction_lines:
@@ -19,15 +18,7 @@ models:
     intermediate:
       +materialized: ephemeral
 
-  quickbooks_source:  #should be removed if it is a package
-    +schema: sources
-    +materialized: view
-
 vars:
-
-  quickbooks_database: fivetran
-  quickbooks_schema: quickbooks
-
   quickbooks:
     account: "{{ ref('stg_quickbooks__account') }}"
     address: "{{ ref('stg_quickbooks__address') }}"
