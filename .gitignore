@@ -5,3 +5,6 @@ logs/
 .DS_Store
 integration_test/.DS_Store
 dbt_packages/
+
+/.vscode
+/.venv

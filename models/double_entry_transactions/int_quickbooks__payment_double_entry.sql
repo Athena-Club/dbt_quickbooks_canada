@@ -26,6 +26,7 @@ ar_accounts as (
     from accounts
 
     where account_type = 'Accounts Receivable'
+        and name = 'Accounts Receivable (A/R)'
         and is_active
         and not is_sub_account
 ),

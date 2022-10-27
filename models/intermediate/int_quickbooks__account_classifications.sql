@@ -72,7 +72,7 @@ final as (
                 end as parent_account_number,
         case when adjusted_balances.is_sub_account
             then parent_accounts.fully_qualified_name
-            else adjusted_balances.fully_qualified_name
+            else adjusted_balances.account_type -- adjusted_balances.fully_qualified_name
                 end as parent_account_name
     from adjusted_balances
 

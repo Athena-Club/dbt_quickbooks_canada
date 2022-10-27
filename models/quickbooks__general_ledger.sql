@@ -30,6 +30,13 @@ with gl_union as (
     from {{ref('int_quickbooks__bill_double_entry')}}
     {% endif %}
 
+    {% if var('using_credit_card_payment', True) %}
+    union all
+
+    select *
+    from {{ref('int_quickbooks__credit_card_payment_txn_double_entry')}}
+    {% endif %}
+
     {% if var('using_credit_memo', True) %}
     union all
 

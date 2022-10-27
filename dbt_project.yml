@@ -5,10 +5,13 @@ version: '0.5.3'
 
 require-dbt-version: [">=1.0.0", "<2.0.0"]
 
+profile: quickbooks  #should be removed if it is a package
+
 models:
   quickbooks:
     +materialized: table
-    +schema: quickbooks
+    #+schema: quickbooks
+    +schema: core #should be removed if it is a package
     double_entry_transactions:
       +materialized: ephemeral
     transaction_lines:
@@ -16,7 +19,15 @@ models:
     intermediate:
       +materialized: ephemeral
 
+  quickbooks_source:  #should be removed if it is a package
+    +schema: sources
+    +materialized: view
+
 vars:
+
+  quickbooks_database: fivetran
+  quickbooks_schema: quickbooks
+
   quickbooks:
     account: "{{ ref('stg_quickbooks__account') }}"
     address: "{{ ref('stg_quickbooks__address') }}"
@@ -27,6 +38,7 @@ vars:
     bill: "{{ ref('stg_quickbooks__bill') }}"
     bundle_item: "{{ ref('stg_quickbooks__bundle_item') }}"
     bundle: "{{ ref('stg_quickbooks__bundle') }}"
+    credit_card_payment_txn: "{{ ref('stg_quickbooks__credit_card_payment_txn') }}"
     credit_memo_line: "{{ ref('stg_quickbooks__credit_memo_line') }}"
     credit_memo: "{{ ref('stg_quickbooks__credit_memo') }}"
     customer: "{{ ref('stg_quickbooks__customer') }}"
@@ -58,6 +70,7 @@ vars:
     #Variables if your company utilizes the below parent and child transactional tables.
     using_address: true
     using_bill: true
+    using_credit_card_payment: true
     using_credit_memo: true
     using_department: true
     using_deposit: true

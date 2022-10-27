@@ -31,7 +31,9 @@ bill_join as (
         bills.bill_id as transaction_id, 
         bill_lines.index,
         bills.transaction_date,
-        bill_lines.amount,
+        -- make an exception here for a Quickbook app error fix. Unfortunately we need to use the CAD amount instead of USD
+        -- https://www.notion.so/9-Quickbooks-6bcfa312f4d74dc58f5b86cf1d8657fb 
+        case when bills.bill_id = 9659 then bill_lines.amount else round(bill_lines.amount*bills.exchange_rate,2) end as amount,
         coalesce(bill_lines.account_expense_account_id, items.expense_account_id, items.parent_expense_account_id, items.expense_account_id, items.parent_income_account_id, items.income_account_id) as payed_to_account_id,
         bills.payable_account_id,
         coalesce(bill_lines.account_expense_customer_id, bill_lines.item_expense_customer_id) as customer_id,
