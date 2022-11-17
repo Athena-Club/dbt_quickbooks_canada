@@ -8,6 +8,11 @@ retained_earnings as (
     from {{ref('int_quickbooks__retained_earnings')}}
 ),
 
+additional_summaries as (
+    select *
+    from {{ref('int_quickbooks__additional_summaries')}}
+),
+
 final as (
     select *
     from general_ledger_balances
@@ -16,6 +21,11 @@ final as (
 
     select *
     from retained_earnings
+    
+    union all 
+
+    select *
+    from additional_summaries    
 )
 
 select *
