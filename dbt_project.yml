@@ -1,6 +1,6 @@
 config-version: 2
 
-name: 'quickbooks'
+name: 'quickbooks_canada'
 version: '0.5.3'
 
 require-dbt-version: [">=1.0.0", "<2.0.0"]
